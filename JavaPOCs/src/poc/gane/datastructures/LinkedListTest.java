@@ -30,13 +30,14 @@ class LinkedList<T> {
 		this.size++;
 	}
 
-	public void addatEnd(T item) {
+	public void addatEnd(T item) throws Exception{
 		Node<T> newNode = new Node<T>(item, null);
 		if(lastNode == null) {
 			firstNode = newNode;
 			lastNode = newNode;
 		} else {
-			lastNode.setLink(newNode);
+			System.out.println("last: " + lastNode);
+			addatPosition(item, size + 1);
 		}
 		this.size++;
 	}
@@ -96,6 +97,29 @@ class LinkedList<T> {
 			lastNode = null;
 		}
 	}
+	
+	public T getFirst() {
+		return firstNode.getItem();
+	}
+	
+	public T getLast() {
+		return lastNode.getItem();
+	}
+	
+	public T getAt(int position) {
+		T item = null;
+		Node<T> thisNode = firstNode;
+		int index = 1;
+		while(index <= size) {
+			if(index == position) {
+				item = thisNode.getItem();
+				break;
+			}
+			thisNode = thisNode.getLink();
+			index++;
+		}
+		return item;
+	}
 
 	public String toString() {
 		String allItems = "";
@@ -147,27 +171,36 @@ class Node<T> {
 public class LinkedListTest {
 	public static void main(String[] args) throws Exception {
 		LinkedList<Integer> list = new LinkedList<Integer>();
+		list.addatStart(12);
 		list.addatEnd(1);
 		list.addatEnd(2);
 		list.addatStart(3);
 		list.addatStart(4);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.addatPosition(0, 3);
 		list.addatPosition(9, 3);
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.removeAt(2);
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.removeFirst();
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.addatStart(8);
 		list.addatEnd(7);
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.removeFirst();
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.removeLast();
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.addatEnd(5);
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 		list.removeLast();
-		System.out.println(list.size() + " : " + list);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
+		System.out.println(list.getAt(4));
+		list.addatEnd(6);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
+		list.addatEnd(7);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
+		list.addatEnd(8);
+		System.out.println(list.size() + " : " + list + " First : " + list.getFirst() + " Last : " + list.getLast());
 	}
 }
